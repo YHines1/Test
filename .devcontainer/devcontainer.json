@@ -1,0 +1,6 @@
+{
+    "name": "User Prompts Dev Container",
+    "dockerFile": "Dockerfile",
+    "postCreateCommand": "/usr/local/bin/user-prompts.sh /bin/bash"
+  }
+  
