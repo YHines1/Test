@@ -8,15 +8,22 @@ RUN apt-get update && \
 # Install Node.js (adjust the version as needed)
 RUN apt-get install -y nodejs npm
 
-# Create a directory for the user-prompts.sh script
-RUN mkdir -p /usr/local/bin
-
-# Copy the user-prompts.sh script into the container
-COPY user-prompts.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/user-prompts.sh
-
 # Set the working directory
 WORKDIR /workspace
 
-# Set the entry point to the user prompts script
-ENTRYPOINT ["/usr/local/bin/user-prompts.sh"]
+# Create a directory for the user-prompts.sh script
+RUN mkdir -p /usr/local/bin
+
+# Copy the script for user prompts and repo cloning into the container
+COPY user-prompts.sh /usr/local/bin/
+COPY clone-repo.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/user-prompts.sh
+RUN chmod +x /usr/local/bin/clone-repo.sh
+
+# Run the script to gather user input during the build
+RUN /usr/local/bin/user-prompts.sh
+
+# Clone Azure DevOps repo
+RUN /usr/local/bin/clone-repo.sh
+
+
