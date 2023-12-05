@@ -15,5 +15,6 @@ read -p "Enter your Azure DevOps Personal Access Token (PAT): " pat
 
 mkdir /workspace 
 
+cd /workspace
 # Clone the repository
-git clone $repo_url /workspace
+git clone $repo_url .
